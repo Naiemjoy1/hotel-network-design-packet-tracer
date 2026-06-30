@@ -1,0 +1,65 @@
+int se0/2/0
+no shut
+
+int se0/2/1
+no shut
+
+int g0/0
+no shut
+
+Router(config)#int s0/2/0
+Router(config-if)#ip addr
+Router(config-if)#ip address 10.10.10.5 255.255.255.252
+Router(config-if)#int s0/2/1
+Router(config-if)#ip address 10.10.10.9 255.255.255.252
+Router(config-if)#do wr
+
+int g0/0.80
+encapsulation dot1Q 80
+ip address 192.168.8.1 255.255.255.0
+int g0/0.70
+encapsulation dot1Q 70
+ip address 192.168.7.1 255.255.255.0
+int g0/0.60
+encapsulation dot1Q 60
+ip address 192.168.6.1 255.255.255.0
+do wr
+
+service dhcp 
+ip dhcp pool Reception
+network 192.168.8.0 255.255.255.0
+default-router 192.168.8.1
+dns-server 192.168.8.1
+exit 
+ip dhcp pool Store
+network 192.168.7.0 255.255.255.0
+default-router 192.168.7.1
+dns-server 192.168.7.1
+
+router ospf 10
+network 10.10.10.4 255.255.255.252 area 0
+network 10.10.10.8 255.255.255.252 area 0
+
+network 192.168.8.0 255.255.255.0 area 0
+network 192.168.7.0 255.255.255.0 area 0
+network 192.168.6.0 255.255.255.0 area 0
+do wr
+
+router ospf 10
+network 10.10.10.4 255.255.255.252 area 0
+network 10.10.10.8 255.255.255.252 area 0
+
+network 192.168.8.0 255.255.255.0 area 0
+network 192.168.7.0 255.255.255.0 area 0
+network 192.168.6.0 255.255.255.0 area 0
+do wr
+
+#ssh#
+ip domain-name testssh
+username test password test
+crypto key generate rsa
+1024 
+line vty 0 15
+login local
+transport input ssh
+do wr

@@ -1,0 +1,65 @@
+int se0/1/0
+no shut
+
+int se0/1/1
+no shut
+int g0/0
+no shut
+int se0/1/1
+no shutdown 
+int se0/1/1
+clock rate 64000
+do wr
+
+int s0/2/0
+ip address 10.10.10.5 255.255.255.252
+int s0/2/1
+ip address 10.10.10.9 255.255.255.252
+do wr
+
+int g0/0.30
+encapsulation dot1Q 30
+ip address 192.168.3.1 255.255.255.0
+
+int g0/0.40
+encapsulation dot1Q 40
+ip address 192.168.4.1 255.255.255.0
+
+int g0/0.50
+encapsulation dot1Q 50
+ip address 192.168.5.1 255.255.255.0
+
+service dhcp 
+ip dhcp pool Finance
+network 192.168.5.0 255.255.255.0
+default-router 192.168.5.1
+dns-server 192.168.5.1
+ 
+ip dhcp pool HR
+network 192.168.4.0 255.255.255.0
+default-router 192.168.4.1
+dns-server 192.168.4.1
+
+ip dhcp pool sales
+network 192.168.3.0 255.255.255.0
+default-router 192.168.3.1
+dns-server 192.168.3.1
+do wr
+
+router ospf 10
+network 10.10.10.0 255.255.255.252 area 0
+network 10.10.10.8 255.255.255.252 area 0
+network 192.168.3.0 255.255.255.0 area 0 
+network 192.168.4.0 255.255.255.0 area 0 
+network 192.168.5.0 255.255.255.0 area 0 
+do wr
+
+#ssh#
+ip domain-name testssh
+username test password test
+crypto key generate rsa
+1024 
+line vty 0 15
+login local
+transport input ssh
+do wr

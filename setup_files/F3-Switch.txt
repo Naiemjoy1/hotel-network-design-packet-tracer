@@ -1,0 +1,10 @@
+int range f0/2-3
+switchport mode access 
+switchport access vlan 10
+int range f0/4-6
+switchport mode access 
+switchport access vlan 20
+int range f0/1
+switchport mode trunk 
+
+do wr
