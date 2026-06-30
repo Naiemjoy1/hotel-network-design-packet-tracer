@@ -1,145 +1,104 @@
-# Modern Hotel Network Design using Cisco Packet Tracer
+# Vic Modern Hotel Network Design using Cisco Packet Tracer
+
+![Topology](https://i.ibb.co.com/nsH5xsc9/topology.png)
 
 ## Project Overview
 
-This project implements a complete enterprise hotel network infrastructure for **Vic Modern Hotel** using Cisco Packet Tracer.
+This project presents the design and implementation of **Vic Modern Hotel Network Infrastructure** using Cisco Packet Tracer. The hotel consists of three floors connected through serial links and configured with OSPF dynamic routing.
 
-The hotel consists of three floors interconnected through routers using serial links and OSPF routing.
+The project demonstrates several enterprise networking technologies including VLAN segmentation, Inter-VLAN Routing, DHCP, SSH, Wireless Networking, and Port Security.
 
-Technologies implemented:
+---
+
+## Technologies Implemented
 
 - Hierarchical Network Design
 - VLAN Segmentation
 - Router-on-a-Stick
-- OSPF Routing
-- DHCP Services
+- OSPF Routing Protocol
+- DHCP Server Configuration
 - SSH Remote Access
-- WLAN Configuration
+- Wireless LAN Configuration
 - Port Security
 - Inter-VLAN Routing
-- Dynamic Address Allocation
+- Dynamic IP Address Allocation
 - Network Testing and Verification
 
 ---
 
 # Hotel Structure
 
-## Floor 1
+## First Floor
 
-| Department | VLAN | Network        |
-| ---------- | ---- | -------------- |
-| Reception  | 80   | 192.168.8.0/24 |
-| Store      | 70   | 192.168.7.0/24 |
-| Logistics  | 60   | 192.168.6.0/24 |
+| Department | VLAN | Network Address |
+| ---------- | ---- | --------------- |
+| Reception  | 80   | 192.168.8.0/24  |
+| Store      | 70   | 192.168.7.0/24  |
+| Logistics  | 60   | 192.168.6.0/24  |
 
----
+## Second Floor
 
-## Floor 2
+| Department      | VLAN | Network Address |
+| --------------- | ---- | --------------- |
+| Finance         | 50   | 192.168.5.0/24  |
+| HR              | 40   | 192.168.4.0/24  |
+| Sales/Marketing | 30   | 192.168.3.0/24  |
 
-| Department | VLAN | Network        |
-| ---------- | ---- | -------------- |
-| Finance    | 50   | 192.168.5.0/24 |
-| HR         | 40   | 192.168.4.0/24 |
-| Sales      | 30   | 192.168.3.0/24 |
+## Third Floor
 
----
-
-## Floor 3
-
-| Department | VLAN | Network        |
-| ---------- | ---- | -------------- |
-| IT         | 10   | 192.168.1.0/24 |
-| Admin      | 20   | 192.168.2.0/24 |
+| Department | VLAN | Network Address |
+| ---------- | ---- | --------------- |
+| IT         | 10   | 192.168.1.0/24  |
+| Admin      | 20   | 192.168.2.0/24  |
 
 ---
 
 # Router Interconnections
 
-| Link            | Network       |
-| --------------- | ------------- |
-| Floor1 ↔ Floor2 | 10.10.10.8/30 |
-| Floor1 ↔ Floor3 | 10.10.10.4/30 |
-| Floor2 ↔ Floor3 | 10.10.10.0/30 |
-
----
-
-# Features Implemented
-
-✔ VLAN Configuration
-
-✔ Router-on-a-Stick
-
-✔ OSPF Routing
-
-✔ DHCP Server Configuration
-
-✔ SSH Configuration
-
-✔ Wireless Networks
-
-✔ Port Security
-
-✔ Sticky MAC Address Learning
-
-✔ Inter-VLAN Communication
-
-✔ Printer Connectivity
-
-✔ Dynamic IP Assignment
+| Connection        | Network       |
+| ----------------- | ------------- |
+| Floor 1 ↔ Floor 2 | 10.10.10.8/30 |
+| Floor 1 ↔ Floor 3 | 10.10.10.4/30 |
+| Floor 2 ↔ Floor 3 | 10.10.10.0/30 |
 
 ---
 
 # Network Topology
 
-![Topology](images/topology.png)
+![Topology](https://i.ibb.co.com/nsH5xsc9/topology.png)
 
 ---
 
-# Floor 1 Configuration
+# VLAN Allocation
 
-### VLANs
-
-| VLAN | Department |
-| ---- | ---------- |
-| 80   | Reception  |
-| 70   | Store      |
-| 60   | Logistics  |
-
-### Router Subinterfaces
-
-```cisco
-interface g0/0.80
-encapsulation dot1Q 80
-ip address 192.168.8.1 255.255.255.0
-
-interface g0/0.70
-encapsulation dot1Q 70
-ip address 192.168.7.1 255.255.255.0
-
-interface g0/0.60
-encapsulation dot1Q 60
-ip address 192.168.6.1 255.255.255.0
-```
+| VLAN ID | Department |
+| ------- | ---------- |
+| 10      | IT         |
+| 20      | Admin      |
+| 30      | Sales      |
+| 40      | HR         |
+| 50      | Finance    |
+| 60      | Logistics  |
+| 70      | Store      |
+| 80      | Reception  |
 
 ---
 
-# OSPF Configuration
+# Routing Protocol
 
-```cisco
-router ospf 10
+The network uses **OSPF Process ID 10** to advertise all internal networks dynamically.
 
-network 10.10.10.0 0.0.0.3 area 0
+### OSPF Verification
 
-network 10.10.10.4 0.0.0.3 area 0
-
-network 10.10.10.8 0.0.0.3 area 0
-
-network 192.168.0.0 0.0.255.255 area 0
-```
+![OSPF](https://i.ibb.co.com/v6rS4FNT/ospf.png)
 
 ---
 
-# DHCP Configuration Example
+# DHCP Configuration
+
+Each router acts as a DHCP server for its respective VLANs.
+
+Example:
 
 ```cisco
 ip dhcp pool Reception
@@ -154,6 +113,8 @@ dns-server 192.168.8.1
 ---
 
 # SSH Configuration
+
+SSH is configured on all routers for secure remote management.
 
 ```cisco
 ip domain-name testssh
@@ -175,7 +136,15 @@ transport input ssh
 
 # Port Security
 
-Configured in IT Department Switch
+Port Security is implemented on the IT department switch.
+
+Features configured:
+
+- Sticky MAC Address Learning
+- Maximum MAC Address = 1
+- Violation Mode = Shutdown
+
+Configuration:
 
 ```cisco
 interface fa0/1
@@ -193,102 +162,83 @@ switchport port-security mac-address sticky
 switchport port-security violation shutdown
 ```
 
----
+### Verification
 
-# Verification
-
-## OSPF Neighbors
-
-![OSPF](images/ospf-neighbor.png)
+![Port Security](https://i.ibb.co.com/FqnbH75g/sticky.png)
 
 ---
 
-## Routing Table
+# Connectivity Test
 
-![Route](images/routing-table.png)
+Inter-VLAN communication was tested successfully.
 
----
+Devices from different departments can communicate through OSPF and Router-on-a-Stick implementation.
 
-## DHCP Lease
+### Ping Verification
 
-![DHCP](images/dhcp.png)
-
----
-
-## SSH Login
-
-![SSH](images/ssh.png)
+![Ping Test](https://i.ibb.co.com/ycBvJwQD/internal-ping.png)
 
 ---
 
-## Port Security
+# Project Features
 
-![PortSecurity](images/port-security.png)
+- ✅ VLAN Configuration
+- ✅ Router-on-a-Stick
+- ✅ OSPF Dynamic Routing
+- ✅ DHCP Services
+- ✅ SSH Remote Login
+- ✅ Wireless Network Support
+- ✅ Port Security
+- ✅ Printer Connectivity
+- ✅ Dynamic Address Assignment
+- ✅ End-to-End Communication
 
 ---
 
-## Successful Ping Test
+# Project File Structure
 
-![Ping](images/ping-test.png)
-
----
-
-# Project Files
-
-```
+```text
 Vic-Modern-Hotel/
-│
+
 ├── README.md
-├── topology.pkt
-├── configs
+├── Vic-Modern-Hotel.pkt
+├── configs/
 │   ├── Floor1-Router.txt
 │   ├── Floor2-Router.txt
 │   ├── Floor3-Router.txt
 │   ├── Switch1.txt
 │   ├── Switch2.txt
 │   └── Switch3.txt
-│
-└── images
+└── screenshots/
     ├── topology.png
-    ├── ospf-neighbor.png
-    ├── routing-table.png
-    ├── ssh.png
-    ├── dhcp.png
-    ├── ping-test.png
-    └── port-security.png
+    ├── ospf.png
+    ├── sticky.png
+    └── internal-ping.png
 ```
 
 ---
 
-# Testing Results
+# Verification Summary
 
-✔ Inter-VLAN Communication Successful
-
-✔ DHCP Address Assignment Successful
-
-✔ OSPF Neighbor Adjacencies Established
-
-✔ SSH Remote Access Successful
-
-✔ Wireless Clients Connected
-
-✔ Port Security Working Correctly
-
-✔ All Departments Reachable
+| Feature                 | Status |
+| ----------------------- | ------ |
+| VLANs                   | ✅     |
+| OSPF                    | ✅     |
+| DHCP                    | ✅     |
+| SSH                     | ✅     |
+| Wireless Network        | ✅     |
+| Port Security           | ✅     |
+| Inter-VLAN Routing      | ✅     |
+| End-to-End Connectivity | ✅     |
 
 ---
 
-# Author
+## Author
 
 **Naiem Hasan**
 
-Cisco Packet Tracer Project
+CCNA Networking Project
 
-CCNA Networking Practice
+Cisco Packet Tracer Lab
 
 2026
-
-https://i.ibb.co.com/ycBvJwQD/internal-ping.png
-https://i.ibb.co.com/v6rS4FNT/ospf.png
-https://i.ibb.co.com/FqnbH75g/sticky.png
-https://i.ibb.co.com/nsH5xsc9/topology.png
