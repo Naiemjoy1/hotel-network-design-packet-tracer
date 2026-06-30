@@ -1,12 +1,12 @@
-# Modern Hotel Network Design using Cisco Packet Tracer
+# 🏨 Hotel Network Design
 
 ![Topology](https://i.ibb.co.com/nsH5xsc9/topology.png)
 
 ## Project Overview
 
-This project presents the design and implementation of **Vic Modern Hotel Network Infrastructure** using Cisco Packet Tracer. The hotel consists of three floors connected through serial links and configured with OSPF dynamic routing.
+This project presents the design and implementation of a **Hotel Network Infrastructure** using Cisco Packet Tracer. The hotel consists of three floors connected through serial links and configured with OSPF dynamic routing.
 
-The project demonstrates several enterprise networking technologies including VLAN segmentation, Inter-VLAN Routing, DHCP, SSH, Wireless Networking, and Port Security.
+The project demonstrates enterprise networking concepts including VLAN segmentation, Inter-VLAN Routing, DHCP, SSH, Wireless Networking, and Port Security.
 
 ---
 
@@ -26,9 +26,9 @@ The project demonstrates several enterprise networking technologies including VL
 
 ---
 
-# Hotel Structure
+## Hotel Structure
 
-## First Floor
+### First Floor
 
 | Department | VLAN | Network Address |
 | ---------- | ---- | --------------- |
@@ -36,7 +36,7 @@ The project demonstrates several enterprise networking technologies including VL
 | Store      | 70   | 192.168.7.0/24  |
 | Logistics  | 60   | 192.168.6.0/24  |
 
-## Second Floor
+### Second Floor
 
 | Department      | VLAN | Network Address |
 | --------------- | ---- | --------------- |
@@ -44,7 +44,7 @@ The project demonstrates several enterprise networking technologies including VL
 | HR              | 40   | 192.168.4.0/24  |
 | Sales/Marketing | 30   | 192.168.3.0/24  |
 
-## Third Floor
+### Third Floor
 
 | Department | VLAN | Network Address |
 | ---------- | ---- | --------------- |
@@ -53,7 +53,7 @@ The project demonstrates several enterprise networking technologies including VL
 
 ---
 
-# Router Interconnections
+## Router Interconnections
 
 | Connection        | Network       |
 | ----------------- | ------------- |
@@ -63,13 +63,13 @@ The project demonstrates several enterprise networking technologies including VL
 
 ---
 
-# Network Topology
+## Network Topology
 
 ![Topology](https://i.ibb.co.com/nsH5xsc9/topology.png)
 
 ---
 
-# VLAN Allocation
+## VLAN Allocation
 
 | VLAN ID | Department |
 | ------- | ---------- |
@@ -84,9 +84,9 @@ The project demonstrates several enterprise networking technologies including VL
 
 ---
 
-# Routing Protocol
+## OSPF Configuration
 
-The network uses **OSPF Process ID 10** to advertise all internal networks dynamically.
+The network uses **OSPF Process ID 10** to dynamically advertise all internal networks.
 
 ### OSPF Verification
 
@@ -94,7 +94,7 @@ The network uses **OSPF Process ID 10** to advertise all internal networks dynam
 
 ---
 
-# DHCP Configuration
+## DHCP Configuration
 
 Each router acts as a DHCP server for its respective VLANs.
 
@@ -102,17 +102,14 @@ Example:
 
 ```cisco
 ip dhcp pool Reception
-
 network 192.168.8.0 255.255.255.0
-
 default-router 192.168.8.1
-
 dns-server 192.168.8.1
 ```
 
 ---
 
-# SSH Configuration
+## SSH Configuration
 
 SSH is configured on all routers for secure remote management.
 
@@ -126,23 +123,15 @@ crypto key generate rsa
 1024
 
 line vty 0 15
-
 login local
-
 transport input ssh
 ```
 
 ---
 
-# Port Security
+## Port Security
 
-Port Security is implemented on the IT department switch.
-
-Features configured:
-
-- Sticky MAC Address Learning
-- Maximum MAC Address = 1
-- Violation Mode = Shutdown
+Port Security is implemented on the IT Department switch using sticky MAC learning.
 
 Configuration:
 
@@ -168,11 +157,9 @@ switchport port-security violation shutdown
 
 ---
 
-# Connectivity Test
+## Connectivity Testing
 
-Inter-VLAN communication was tested successfully.
-
-Devices from different departments can communicate through OSPF and Router-on-a-Stick implementation.
+Devices from different VLANs communicate successfully through OSPF and Router-on-a-Stick implementation.
 
 ### Ping Verification
 
@@ -180,56 +167,35 @@ Devices from different departments can communicate through OSPF and Router-on-a-
 
 ---
 
-# Project Features
+## Features Completed
 
 - ✅ VLAN Configuration
 - ✅ Router-on-a-Stick
 - ✅ OSPF Dynamic Routing
 - ✅ DHCP Services
-- ✅ SSH Remote Login
-- ✅ Wireless Network Support
+- ✅ SSH Remote Access
+- ✅ Wireless Networking
 - ✅ Port Security
 - ✅ Printer Connectivity
-- ✅ Dynamic Address Assignment
-- ✅ End-to-End Communication
+- ✅ Dynamic IP Assignment
+- ✅ Inter-VLAN Communication
 
 ---
 
-# Project File Structure
+## Project Structure
 
 ```text
-Vic-Modern-Hotel/
+Hotel-Network-Design/
 
 ├── README.md
-├── Vic-Modern-Hotel.pkt
+├── Hotel-Network-Design.pkt
 ├── configs/
-│   ├── Floor1-Router.txt
-│   ├── Floor2-Router.txt
-│   ├── Floor3-Router.txt
-│   ├── Switch1.txt
-│   ├── Switch2.txt
-│   └── Switch3.txt
-└── screenshots/
-    ├── topology.png
-    ├── ospf.png
-    ├── sticky.png
-    └── internal-ping.png
+├── screenshots/
+│   ├── topology.png
+│   ├── ospf.png
+│   ├── sticky.png
+│   └── internal-ping.png
 ```
-
----
-
-# Verification Summary
-
-| Feature                 | Status |
-| ----------------------- | ------ |
-| VLANs                   | ✅     |
-| OSPF                    | ✅     |
-| DHCP                    | ✅     |
-| SSH                     | ✅     |
-| Wireless Network        | ✅     |
-| Port Security           | ✅     |
-| Inter-VLAN Routing      | ✅     |
-| End-to-End Connectivity | ✅     |
 
 ---
 
@@ -237,8 +203,4 @@ Vic-Modern-Hotel/
 
 **Naiem Hasan**
 
-CCNA Networking Project
-
-Cisco Packet Tracer Lab
-
-2026
+Cisco Packet Tracer Project • 2026
