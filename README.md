@@ -1,4 +1,4 @@
-# Vic Modern Hotel Network Design using Cisco Packet Tracer
+# Modern Hotel Network Design using Cisco Packet Tracer
 
 ![Topology](https://i.ibb.co.com/nsH5xsc9/topology.png)
 
