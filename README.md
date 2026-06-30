@@ -288,7 +288,7 @@ CCNA Networking Practice
 
 2026
 
-https://ibb.co.com/DHgcnxRN
-https://ibb.co.com/Jwb9j1YG
-https://ibb.co.com/gF6M4gSz
-https://ibb.co.com/QF21yFNL
+https://i.ibb.co.com/ycBvJwQD/internal-ping.png
+https://i.ibb.co.com/v6rS4FNT/ospf.png
+https://i.ibb.co.com/FqnbH75g/sticky.png
+https://i.ibb.co.com/nsH5xsc9/topology.png
